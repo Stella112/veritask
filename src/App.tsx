@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import {
-  Wallet, Activity, ExternalLink, CheckCircle,
-  Lock, ArrowLeft, LayoutGrid, User, XCircle, PlusCircle, ChevronRight, Terminal, Sun, Moon
+  Wallet, Activity, ExternalLink,
+  Lock, ArrowLeft, LayoutGrid, User, PlusCircle, ChevronRight, Terminal, Sun, Moon, XCircle
 } from 'lucide-react';
 
 // ── Contract ─────────────────────────────────────────────────────────────────
@@ -233,7 +233,7 @@ export default function App() {
         reward: `${hostReward} GEN`,
         isMine: true,
       };
-      setBounties(prev => [newBounty, ...prev]);
+      setBounties((prev: any) => [newBounty, ...prev]);
       // Reset form and switch to explore
       setHostTitle('');
       setHostReward('');
@@ -371,7 +371,7 @@ export default function App() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                    {bounties.map((bounty) => (
+                    {bounties.map((bounty: any) => (
                       <tr key={bounty.id} onClick={() => openDetail(bounty)}
                         className="hover:bg-gray-50 dark:hover:bg-[#0B0E14]/40 transition-colors cursor-pointer group">
                         <td className="py-4 px-6">
@@ -643,7 +643,7 @@ export default function App() {
   // ════════════════════════════════════════════════════════════════════════════
   // VIEW 3 — My Dashboard (Default/Fallback)
   // ════════════════════════════════════════════════════════════════════════════
-  const myHostedBounties = bounties.filter(b => (b as any).isMine);
+  const myHostedBounties = bounties.filter((b: any) => b.isMine);
 
   return (
     <div className="flex h-screen bg-white dark:bg-[#0B0E14] text-gray-900 dark:text-gray-100 font-sans selection:bg-gray-200 dark:selection:bg-[#00F5FF]/30 transition-colors duration-300">
@@ -752,7 +752,7 @@ export default function App() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                      {myHostedBounties.map((bounty, i) => (
+                      {myHostedBounties.map((bounty: any, i: number) => (
                         <tr key={`${bounty.id}-${i}`} className="hover:bg-gray-50 dark:hover:bg-[#0B0E14]/40 transition-colors">
                           <td className="py-4 px-6">
                             <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{bounty.title}</p>
