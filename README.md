@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# VeriTask 🛡️ | AI-Verified Freelance Escrow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Built for the Aleph Hackathon on the GenLayer Network (Bradbury Testnet)**
 
-Currently, two official plugins are available:
+## The Problem
+Traditional freelance marketplaces rely on centralized, slow, and often biased human arbitration to resolve disputes. When a freelancer submits a deliverable, proving that the "Proof of Work" meets the exact criteria of the bounty is entirely subjective and prone to friction.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## The Solution
+**VeriTask** is a decentralized, two-sided escrow marketplace that replaces human middlemen with **GenLayer Intelligent Contracts**. By utilizing Optimistic Democracy and the Equivalence Principle, VeriTask programmatically evaluates off-chain web deliverables and releases funds only when a decentralized network of AI validator nodes reaches consensus.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ How It Works
 
-## Expanding the ESLint configuration
+1. **Host a Task:** Clients deploy a bounty with specific criteria and lock the reward (plus a 10 GEN verification fee) into the VeriTask escrow contract.
+2. **Submit Work:** Freelancers submit a URL pointing to their completed deliverable (e.g., a GitHub repo, a Figma file, or a published article).
+3. **Decentralized AI Verification:** * The Intelligent Contract fetches the live web content using GenLayer's `gl.nondet.web` module.
+   * Multiple validator nodes independently evaluate the content against the original task description using an LLM.
+   * GenLayer's `gl.eq_principle` evaluates the outputs to ensure Semantic Equivalence.
+4. **Automated Payout:** If the validator network reaches a `PASS` consensus, the UI updates instantly, and the smart contract authorizes the release of the funds.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🔗 Smart Contract Details
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The core verification logic is deployed live on the GenLayer Bradbury Testnet. 
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Contract Detail | Value |
+| :--- | :--- |
+| **Network** | GenLayer Bradbury Testnet |
+| **Contract Address** | `0x67b43beE35a9C2e52f81bAB1a9bCCAfD4e162E16` |
+| **Core SDK Modules** | `gl.nondet.web`, `gl.eq_principle` |
+| **Language** | Python (GenVM v0.15+) |
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 💻 Frontend Architecture
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+VeriTask features a production-ready, highly responsive SPA built to enterprise fintech standards.
+
+* **Tech Stack:** React, Vite, Tailwind CSS, Ethers.js.
+* **Web3 Integration:** Full MetaMask connectivity for paying hosting fees and triggering GenLayer contract verifications.
+* **State Management:** Dual-sided dashboard tracking both freelancer submissions and client-hosted tasks, persisted via browser storage.
+* **Theming:** Seamless toggle between a stark, professional "Fintech Minimalist" Light Mode and a deep, developer-focused "Neural Midnight" Dark Mode.
+* **Live Consensus Terminal:** Real-time visual feedback simulating the Optimistic Democracy validator logs for complete Explainable AI transparency.
+
+---
+
+## 🏗️ About the Architecture
+VeriTask bridges the gap between clean, intuitive design and bleeding-edge Web3 intelligence. It was designed from the ground up by an AI Application Specialist to demonstrate that complex, multi-node AI consensus can be packaged into a frictionless, consumer-ready platform.
