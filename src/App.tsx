@@ -652,7 +652,32 @@ export default function App() {
         <Topbar title="My Dashboard" />
         <div className="flex-1 overflow-auto p-8">
           <div className="max-w-6xl mx-auto">
-            
+            {/* ── AI Reliability Score ── */}
+            {(() => {
+              const total = submissions.length;
+              const verified = submissions.filter((s: any) => s.status === 'VERIFIED').length;
+              const isEmpty = total === 0;
+              const score = isEmpty ? 100 : Math.round((verified / total) * 100);
+              const label = isEmpty ? '100% · New Provider' : `${score}%`;
+              const dotColor = score > 80 ? 'bg-green-500' : score >= 50 ? 'bg-yellow-400' : 'bg-red-500';
+              const scoreColor = score > 80 ? 'text-green-600 dark:text-green-400' : score >= 50 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400';
+              return (
+                <div className="mb-8 bg-white dark:bg-[#161B22] border border-gray-200 dark:border-gray-800 p-6 flex items-center justify-between shadow-sm transition-colors duration-300">
+                  <div>
+                    <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-1">AI Reliability Rating</p>
+                    <div className="flex items-center gap-3">
+                      <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${dotColor}`} />
+                      <span className={`text-3xl font-bold tracking-tight ${scoreColor}`}>{label}</span>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{verified} verified · {total - verified} rejected</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-600 mt-1">{total} total submission{total !== 1 && 's'}</p>
+                  </div>
+                </div>
+              );
+            })()}
+
             <div className="flex items-center gap-6 mb-8 border-b border-gray-200 dark:border-gray-800">
               <button 
                 onClick={() => setDashboardTab('submissions')}
